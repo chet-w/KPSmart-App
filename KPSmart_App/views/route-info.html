@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Route Management| KPSmart</title>
+    <link rel="stylesheet" href="../public/stylesheets/style.css">
+
+</head>
+
+<body>
+
+<div id="nav">
+    <div class="sidenav">
+        <div id="nav-logo">
+            <a href="welcome.html" title="KPSmart Home" ><img src="../public/images/logo.png" height="75"/></a>
+        </div>
+        <div class="nav-contain">
+
+            <ul id=" nav-events">
+                <li><a href="welcome.html"><strong>Welcome</strong></a></li>
+
+                <li id="drop"  onclick="toggle_visibility()"><a href="#"><strong>Business Events</strong><span class="arrow"></span></a>
+                    <ul id="be">
+                        <li><a href="mail-delivery.html">Mail Delivery</a></li>
+                        <li><a href="price-update.html">Customer Price Update</a></li>
+                        <li><a href="transport-update.html">Transport Cost Update</a></li>
+                        <li id="currenttab"><a href="#">Route Management</a></li>
+                    </ul>
+                </li>
+                <script type="text/javascript">
+                    function toggle_visibility() {
+                        var e = document.getElementById('be')
+                        var arr = document.getElementsByClassName('arrow');
+                        if(e.style.display == 'block') {
+                            e.style.display = 'none';
+                        }
+                        else {
+                            e.style.display = 'block';
+                        }
+                    }
+                </script>
+
+                <li><a href="monitoring.html"><strong>Business Monitoring</strong></a></li>
+            </ul>
+
+
+        </div>
+        <div id="identifier">
+            Logged in as <i>Chet</i>
+            <img src="../public/images/clerk.png" id="m-image"/><br>
+            <span id="m-status"><i>Clerk</i></span>
+        </div>
+    </div>
+
+</div>
+<div id="body">
+    <div id="page-title">
+        Route xx Information
+    </div>
+    <div id="content">
+        <p>Below is the Route Information for Route xx. </p>
+
+        <p>Note that to adjust the cost values for this Route, you must go to the Transport Cost Update page.</p>
+        <p>
+            <img src="../public/images/route.png" id="page-image">
+            <h2>Metrics</h2>
+            Price per kilometre: $xx.xx<br>
+            Price per kilogram: $xx.xx<br>
+            Price per cubic metre: $xx.xx<br>
+        </p>
+
+        <p>
+            <h2>Logistics</h2>
+            Origin: xxxxxxxxxx<br>
+            Destination: xxxxxxxxxx<br>
+            Carrier: xxxxxxxxxxx <span class="pricing-min"> Carrier Departure Days: xxxxxx</span><br>
+            Type: Land <span class=pricing-min>Carrier Departure Hours: xxxxxx</span><br>
+        </p>
+        <br>
+        <p>
+            This route is currently ACTIVE. Would you like to deactivate it?
+            <span id="active-select">
+               Yes <input type="radio" name="active" value="Yes" checked onclick="check()">
+               No <input type="radio" name="active" value="No" onclick="check()">
+            </span>
+            <script>
+                function check() {
+                    confirm("Are you sure you would like to change this routes activity status?");
+
+                }
+            </script>
+        </p>
+        
+    </div>
+
+</div>
+
+</body>
+</html>

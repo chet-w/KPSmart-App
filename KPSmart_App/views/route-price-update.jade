@@ -1,0 +1,101 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        title Route xx Pricing | KPSmart
+        link(rel='stylesheet', href='../stylesheets/style.css')
+    body
+        #nav
+            .sidenav
+                #nav-logo
+                    a(href='welcome', title='KPSmart Home')
+                        img(src='../images/logo.png', height='75')
+                .nav-contain
+                    ul#nav-events
+                        li
+                            a(href='../welcome')
+                                strong Welcome
+                        li#drop(onclick='toggle_visibility()')
+                            a(href='#')
+                                strong Business Events
+                                span.arrow
+                            ul#be
+                                li
+                                    a(href='../mailDelivery') Mail Delivery
+                                li#currenttab
+                                    a(href='../priceUpdate') Customer Price Update
+                                li
+                                    a(href='../transportCostUpdate') Transport Cost Update
+                                li
+                                    a(href='../routeManagement') Route Management
+                        script(type='text/javascript').
+                            function toggle_visibility() {
+                                var e = document.getElementById('be')
+                                var arr = document.getElementsByClassName('arrow');
+                                if(e.style.display == 'block') {
+                                    e.style.display = 'none';
+                                }
+                                else {
+                                    e.style.display = 'block';
+                                }
+                            }
+                        li
+                            a(href='../businessMonitoring')
+                                strong Business Monitoring
+                        if manager
+                            li
+                                a(href='decisionSupport')
+                                    strong Decision Support
+                #identifier
+                    | Logged in as !{signedInUser}
+                    if manager
+                        img#m-image(src='../images/manager.png')
+                    else
+                        img#m-image(src='../images/clerk.png')
+                    br
+                    span#m-status
+                        i !{signedInUser}
+                    br
+                    a#logout(href='index') Log out
+        #body
+            #page-title Route #{data[0].id} Price Update
+            #content
+                p Please select an element for the price of this route to maintain.
+                p(style="color:#008000") #{message}
+                img#page-image(src='../images/coin.png')
+                br
+                br
+                form#route-price-adj(role="form" method="post" action="/routePrice")
+
+                    br
+                    |             Price per Kilogram ($/kg)
+                    span.pricing-min
+                        strong - Current Price: $ #{data[0].cost_per_kg_customer}/kg
+                    br
+                    input(type='number', step='0.01' min="!!!cost!!!",name="newPriceKg", placeholder='Price per kg')
+                    span.pricing-min - Current Cost: $ #{data[0].cost_per_kg_business}/kg
+                    br
+                    br
+                    br
+                    br
+                    |             Price per Cubic Metre ($/m
+                    sup 3
+                    | )
+                    span.pricing-min
+                        strong
+                            | - Current Price: $ #{data[0].cost_per_volume_customer}/m
+                            sup 3
+                    br
+                    input(type='number' step='0.01' min="!!!cost!!!",name="newPriceVolume", placeholder='Price per cubic m')
+                    span.pricing-min
+                        | - Current Cost: $ #{data[0].cost_per_volume_business}/m
+                        sup 3
+                    br
+                    br
+                    br
+                    br
+                    input#submit(type='submit', value='Submit', onclick='check()')
+                    script.
+                        function check(){
+                            confirm("Are you sure about these changes?");
+                        }

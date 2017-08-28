@@ -1,0 +1,32 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        title Log In | KPSmart
+        link(rel='stylesheet', href='stylesheets/style.css')
+    body
+        #container
+            #logo
+                img#titlelogo(class='img-rounded',src='images/logo.png')
+            form(role="form" method="post" action="/")
+                #login
+                    p Enter your credentials
+                    #username
+                        input(type='text', name='username', placeholder='Username')
+                        br
+                    #password
+                        input(type='password', name='password', placeholder='Password')
+                        br
+                    #loginbutton
+                        button
+                            span
+                                a(type='submit')
+                                    strong Log in
+                    #ErrorMessage
+                    br
+                    e !{message}
+        script(src="library/js/jquery-3.1.1.min.js")
+        script(src="library/js/jquery-ui.min.js")
+        script(src="main.js")
+
+

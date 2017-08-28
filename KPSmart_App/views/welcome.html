@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome | KPSmart</title>
+    <link rel="stylesheet" href="../public/stylesheets/style.css">
+
+</head>
+
+<body>
+
+    <div id="nav">
+        <div class="sidenav">
+            <div id="nav-logo">
+                <a href="welcome.html" title="KPSmart Home" ><img src="../public/images/logo.png" height="75"/></a>
+            </div>
+            <div class="nav-contain">
+
+                <ul id=" nav-events">
+                    <li id="currenttab"><a href="#"><strong>Welcome</strong></a></li>
+
+                    <li id="drop" onclick="toggle_visibility()"><a href="#"><strong>Business Events</strong><span class="arrow"></span></a>
+                        <ul id="be">
+                            <li><a href="mail-delivery.html">Mail Delivery</a></li>
+                            <li><a href="price-update.html">Customer Price Update</a></li>
+                            <li><a href="cost-update.html">Transport Cost Update</a></li>
+                            <li><a href="route-management">Route Management</a></li>
+                        </ul>
+                    </li>
+                    <script type="text/javascript">
+                        function toggle_visibility() {
+                            var e = document.getElementById('be')
+                            var arr = document.getElementsByClassName('arrow');
+                            if(e.style.display == 'block') {
+                                e.style.display = 'none';
+                            }
+                            else {
+                                e.style.display = 'block';
+                            }
+                        }
+                    </script>
+
+                    <li><a href="#"><strong>Business Monitoring</strong></a></li>
+                </ul>
+
+
+            </div>
+            <div id="identifier">
+                Logged in as <i>Chet</i>
+                <img src="../public/images/clerk.png" id="m-image"/><br>
+                <span id="m-status"><i>Clerk</i></span>
+            </div>
+        </div>
+
+    </div>
+    <div id="body">
+        <div id="page-title">
+            Welcome
+        </div>
+        <div id="content">
+            <p>Welcome to the Kelburn Post Smart Mail Managment System, CHET.</p><br>
+            <p>You are logged in as a CLERK</p><br>
+            <img src="../public/images/home.png" id="page-image"/>
+            <p>Please select an activity from the sidebar</p>
+
+
+        </div>
+
+    </div>
+
+</body>
+</html>

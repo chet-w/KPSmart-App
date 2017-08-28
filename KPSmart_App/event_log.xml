@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<simulation>
+  <cost>
+    <id>5</id>
+    <trans_weight_cost>5</trans_weight_cost>
+    <trans_volume_cost>5</trans_volume_cost>
+    <cust_weight_cost>1</cust_weight_cost>
+    <cust_volume_cost>2</cust_volume_cost>
+  </cost>
+  <mail>
+    <id>952</id>
+    <cost>5</cost>
+    <weight>5</weight>
+    <volume>4</volume>
+    <send_date>Fri Jun 16 2017</send_date>
+    <arrive_date>Sun Jun 18 2017</arrive_date>
+    <is_arrived>false</is_arrived>
+    <route_id>17</route_id>
+  </mail>
+  <discontinue>
+    <id>4</id>
+    <origin_name>Hungary</origin_name>
+    <destination_name>Palmerston North</destination_name>
+    <land>true</land>
+    <sea>false</sea>
+    <air>false</air>
+    <trans_weight_cost>$12.00</trans_weight_cost>
+    <trans_volume_cost>$1.00</trans_volume_cost>
+    <cust_weight_cost>$5.00</cust_weight_cost>
+    <cust_volume_cost>$3.00</cust_volume_cost>
+  </discontinue>
+</simulation>

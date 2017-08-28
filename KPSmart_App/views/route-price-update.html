@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Route xx Pricing | KPSmart</title>
+    <link rel="stylesheet" href="../public/stylesheets/style.css">
+</head>
+<body>
+<div id="nav">
+    <div class="sidenav">
+        <div id="nav-logo"><a href="welcome" title="KPSmart Home"><img src="images/logo.png" height="75"></a></div>
+        <div class="nav-contain">
+            <ul id="nav-events">
+                <li><a href="welcome"><strong>Welcome</strong></a></li>
+                <li id="drop" onclick="toggle_visibility()"><a href="#"><strong>Business Events</strong><span class="arrow"></span></a>
+                    <ul id="be">
+                        <li><a href="mailDelivery">Mail Delivery</a></li>
+                        <li><a href="priceIpdate">Customer Price Update</a></li>
+                        <li id="currenttab"><a href="transportUpdate">Transport Cost Update</a></li>
+                        <li><a href="routeManagement">Route Management</a></li>
+                    </ul>
+                </li>
+                <script type="text/javascript">
+                    function toggle_visibility() {
+                        var e = document.getElementById('be')
+                        var arr = document.getElementsByClassName('arrow');
+                        if(e.style.display == 'block') {
+                            e.style.display = 'none';
+                        }
+                        else {
+                            e.style.display = 'block';
+                        }
+                    }
+                </script>
+                <li><a href="businessMonitoring"><strong>Business Monitoring</strong></a></li>
+            </ul>
+        </div>
+        <div id="identifier">Logged in as <img id="m-image" src="images/clerk.png"><br><span id="m-status"><i></i></span>
+        </div>
+    </div>
+</div>
+<div id="body">
+    <div id="page-title">Route xx Price Update</div>
+    <div id="content">
+        <p>Please select an element for the price of this route to maintain.</p><img id="page-image" src="../public/images/coin.png"><br><br>
+        <form id="route-price-adj">
+            Price per Kilometre ($/km)                                 <span class="pricing-min"><strong>- Current Price: $x:xx/km</strong></span><br>
+            <input type="number" placeholder="Price per km">        <span class="pricing-min">- Current Cost: $x:xx/km</span><br><br>
+
+            Price per Kilogram ($/kg)                                   <span class="pricing-min"><strong>- Current Price: $x:xx/kg</strong></span><br>
+            <input type="number" placeholder="Price per kg">        <span class="pricing-min">- Current Cost: $x:xx/kg</span><br><br>
+
+            Price per Cubic Metre ($/m<sup>3</sup>)                    <span class="pricing-min"><strong>- Current Price: $x:xx/m<sup>3</sup></strong></span><br>
+            <input type="number" placeholder="Price per cubic m">   <span class="pricing-min">- Current Cost: $x:xx/m<sup>3</sup></span><br><br>
+
+            <input id="submit" type="submit" value="submit" onclick="check()">
+            <script>
+                function check(){
+                    confirm("Are you sure about these changes?");
+                }
+            </script>
+        </form>
+    </div>
+</div>
+</body>
+</html>

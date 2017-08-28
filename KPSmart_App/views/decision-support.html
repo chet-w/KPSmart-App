@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Decision Support | KPSmart</title>
+    <link rel="stylesheet" href="../public/stylesheets/style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js" />
+
+</head>
+
+<body onload="show()">
+<script>
+    function show() {
+        var block = document.getElementById('be');
+        block.style.display = 'block';
+    }
+
+</script>
+
+<div id="nav">
+    <div class="sidenav">
+        <div id="nav-logo">
+            <a href="welcome.html" title="KPSmart Home" ><img src="../public/images/logo.png" height="75"/></a>
+        </div>
+        <div class="nav-contain">
+
+            <ul id=" nav-events">
+                <li><a href="welcome.html"><strong>Welcome</strong></a></li>
+
+                <li id="drop"  onclick="toggle_visibility()"><a href="#"><strong>Business Events</strong><span class="arrow"></span></a>
+                    <ul id="be">
+                        <li><a href="mail-delivery.html">Mail Delivery</a></li>
+                        <li><a href="price-update.html">Customer Price Update</a></li>
+                        <li><a href="transport-update.html">Transport Cost Update</a></li>
+                        <li><a href="route-management.html">Route Management</a></li>
+                    </ul>
+                </li>
+                <script type="text/javascript">
+                    function toggle_visibility() {
+                        var e = document.getElementById('be')
+                        var arr = document.getElementsByClassName('arrow');
+                        if(e.style.display == 'block') {
+                            e.style.display = 'none';
+                        }
+                        else {
+                            e.style.display = 'block';
+                        }
+                    }
+                </script>
+
+                <li><a href="#"><strong>Business Monitoring</strong></a></li>
+                <li id="currenttab" id="dec-sup-tab"><a href="#"><strong>Decision Support</strong></a></li>
+            </ul>
+
+
+        </div>
+        <div id="identifier">
+            Logged in as <i>Chet</i>
+            <img src="../public/images/clerk.png" id="m-image"/><br>
+            <span id="m-status"><i>Clerk</i></span>
+        </div>
+    </div>
+
+</div>
+<div id="body">
+    <div id="page-title">
+        Decision Support
+    </div>
+    <div id="content" class="business" style="width: 80%">
+        <p>
+            As a Manager, you can compare the Revenue and Expenditure of a range of routes over a selected range of
+             calendar days.
+        </p>
+        <p>
+            You can filter your range of Routes to be examined by their Origin, Destination, Transport Firm used,
+            and Type of transport (Land, Air, or Sea).
+        </p>
+
+        <p>
+            You may also view a list of all the Critical Routes on the KPS Network at the bottom of the page.
+        </p>
+        <h1>Insights</h1>
+        <table>
+            <tr>
+                <td>
+                    Begin Date
+                </td>
+
+                <td>
+                    End Date
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="date" placeholder="DD/MM/YYYY">
+                </td>
+
+                <td>
+                    <input type="date" placeholder="DD/MM/YYYY">
+                </td>
+            </tr>
+        </table>
+
+        <table id="trans-filter">
+            <tr>
+                <td>Origin</td>
+                <td>Destination</td>
+                <td>Transport Firm</td>
+                <td>Type</td>
+            </tr>
+            <tr>
+                <td><input class="trans-filter-drop" id="lead-trans-drop" list="locations" placeholder="Origin"></td>
+                <td><input class="trans-filter-drop" list="locations" placeholder="Destination"></td>
+                <td><input class="trans-filter-drop" list="firms" placeholder="Firm"></td>
+                <td><input class="trans-filter-drop" list="trans-types" placeholder="Type"></td>
+            </tr>
+        </table>
+        <br>
+        <table class="metrics">
+            <tr>
+                <td>Route ID</td>
+                <td>Origin</td>
+                <td>Destination</td>
+                <td>Firm</td>
+                <td>Type</td>
+                <td>Revenue</td>
+                <td>Expenditure</td>
+            </tr>
+            <!--Entries from the filter. To find the revenue and expenditure, check all the parcels
+            on the route and if they were dispatched within the timeframe then take the amount that
+            that parcel cost and made (expenditure and revenue) and add it to a totalRevenue variable
+            that is what gets displayed in the "Revenue" tab. Or so i would think, you can do it any
+            way you want.-->
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <h1>Critical Routes</h1>
+        <p>
+            The Kelburn Post Service manages a range of Routes on its network, some of which yield less
+            income than they cost. These Critical Routes can be seen below.
+        </p>
+        <table class="metrics">
+            <tr>
+                <td>RouteID</td>
+                <td>Origin</td>
+                <td>Destination</td>
+                <td>Average Cost ($)</td>
+                <td>Average Price ($)</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

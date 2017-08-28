@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mail Delivery Confirm| KPSmart</title>
+    <link rel="stylesheet" href="../public/stylesheets/style.css">
+</head>
+<body>
+<div id="nav">
+    <div class="sidenav">
+        <div id="nav-logo"><a href="welcome" title="KPSmart Home"><img src="../public/images/logo.png" height="75"></a></div>
+        <div class="nav-contain">
+            <ul id="nav-events">
+                <li><a href="welcome"><strong>Welcome</strong></a></li>
+                <li id="drop" onclick="toggle_visibility()"><a href="#"><strong>Business Events</strong><span class="arrow"></span></a>
+                    <ul id="be">
+                        <li id="currenttab"><a href="mailDelivery">Mail Delivery</a></li>
+                        <li><a href="priceUpdate">Customer Price Update</a></li>
+                        <li><a href="transportCostUpdate">Transport Cost Update</a></li>
+                        <li><a href="routeManagement">Route Management</a></li>
+                    </ul>
+                </li>
+                <script type="text/javascript">
+                    function toggle_visibility() {
+                        var e = document.getElementById('be')
+                        var arr = document.getElementsByClassName('arrow');
+                        if (e.style.display == 'block') {
+                            e.style.display = 'none';
+                        }
+                        else {
+                            e.style.display = 'block';
+                        }
+                    }
+                </script>
+                <li><a href="businessMonitoring"><strong>Business Monitoring</strong></a></li>
+            </ul>
+        </div>
+        <div id="identifier">Logged in as <img id="m-image" src="../public/images/clerk.png"><br><span id="m-status"><i></i></span>
+        </div>
+    </div>
+</div>
+<div id="body">
+    <div id="page-title">Mail Delivery Confirmation</div>
+    <div id="content"><br>
+        <p>
+            Please confirm your Parcel Details. You may change the Origin, Destination, Weight, and
+            Volume of the Parcel if they are incorrect by selecting the back button.
+        </p>
+
+        <img src="../public/images/confirm-parcel.png" id="page-image">
+
+        <table id="parcel-details">
+            <tr>
+                <td>Origin</td>
+                <td class="parcel-details-value">"value"</td>
+            </tr>
+            <tr>
+                <td>Destination</td>
+                <td class="parcel-details-value">"value"</td>
+            </tr>
+            <tr>
+                <td>Weight</td>
+                <td class="parcel-details-value">"value"</td>
+            </tr>
+            <tr>
+                <td>Volume</td>
+                <td class="parcel-details-value">"value"</td>
+            </tr>
+            <tr>
+                <td>Freight Type</td>
+                <td class="parcel-details-value">"value"</td>
+            </tr>
+            <tr>
+                <td>Date Sent</td>
+                <td class="parcel-details-value">"value"</td>
+            </tr>
+            <tr>
+                <td>Travel Time</td>
+                <td class="parcel-details-value">"value"</td>
+            </tr>
+            <tr>
+                <td  style="border-top: solid #0093c9"><strong>Total Cost: </strong></td>
+                <td style="border-top: solid #0093c9" class="parcel-details-value">"value"</td>
+            </tr>
+
+        </table>
+
+
+
+        <br>
+        <form role="form" method="post" >
+            <input class="button" type="submit" value="Confirm" action="mailDelivery/confirm">
+            <input class="button" type="submit" value="Back" onclick="goBack()">
+
+            <script>
+                function goBack(){
+                    window.history.back();
+                }
+            </script>
+        </form>
+    </div>
+</div>
+</body>
+</html>

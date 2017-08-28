@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Route xx Information | KPSmart</title>
+    <link rel="stylesheet" href="../public/stylesheets/style.css">
+
+</head>
+
+<body>
+
+<div id="nav">
+    <div class="sidenav">
+        <div id="nav-logo">
+            <a href="welcome.html" title="KPSmart Home" ><img src="../public/images/logo.png" height="75"/></a>
+        </div>
+        <div class="nav-contain">
+
+            <ul id=" nav-events">
+                <li><a href="welcome.html"><strong>Welcome</strong></a></li>
+
+                <li id="drop"  onclick="toggle_visibility()"><a href="#"><strong>Business Events</strong><span class="arrow"></span></a>
+                    <ul id="be">
+                        <li><a href="mail-delivery.html">Mail Delivery</a></li>
+                        <li><a href="price-update.html">Customer Price Update</a></li>
+                        <li id="currenttab"><a href="transport-update.html">Transport Cost Update</a></li>
+                        <li><a href="route-management.html">Route Management</a></li>
+                    </ul>
+                </li>
+                <script type="text/javascript">
+                    function toggle_visibility() {
+                        var e = document.getElementById('be')
+                        var arr = document.getElementsByClassName('arrow');
+                        if(e.style.display == 'block') {
+                            e.style.display = 'none';
+                        }
+                        else {
+                            e.style.display = 'block';
+                        }
+                    }
+                </script>
+
+                <li><a href="monitoring.html"><strong>Business Monitoring</strong></a></li>
+            </ul>
+
+
+        </div>
+        <div id="identifier">
+            Logged in as <i>Chet</i>
+            <img src="../public/images/clerk.png" id="m-image"/><br>
+            <span id="m-status"><i>Clerk</i></span>
+        </div>
+    </div>
+
+</div>
+<div id="body">
+    <div id="page-title">
+        Route xx Cost Update
+    </div>
+    <div id="content">
+        <p>Please select an element for the cost of this route to maintain.</p>
+        <img src="../public/images/transport2.png" id="page-image">
+        <br><br>
+        <form id="route-price-adj">
+            Cost per Kilometre ($/km)<span class="pricing-min"><strong>- Current Cost: $x:xx/km</strong></span>
+            <input type="number" placeholder="Price per km"><br>
+            <br>
+            Cost per Kilogram ($/kg)<span class="pricing-min"><strong>- Current Cost: $x:xx/km</strong></span>
+            <input type="number" placeholder="Price per kg"><br>
+            <br>
+
+            Cost per Cubic Metre ($/m<sup>3</sup>)<span class="pricing-min"><strong>- Current Cost: $x:xx/km</strong></span>
+            <input type="number" placeholder="Price per cubic m"><br>
+            <br>
+
+            <input id="submit" type="submit" value="submit" onclick="check()">
+            <script>
+                function check(){
+                    confirm("Are you sure about these changes?");
+                }
+            </script>
+        </form>
+
+
+
+    </div>
+
+</div>
+
+</body>
+</html>

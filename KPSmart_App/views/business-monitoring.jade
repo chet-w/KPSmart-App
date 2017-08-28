@@ -1,0 +1,289 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        title Business Monitoring | KPSmart
+        link(rel='stylesheet', href='stylesheets/style.css')
+        script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js')
+    body
+        #nav
+            .sidenav
+                #nav-logo
+                    a(href='welcome.html', title='KPSmart Home')
+                        img(src='images/logo.png', height='75')
+                .nav-contain
+                    ul#nav-events
+                        li
+                            a(href='welcome.html')
+                                strong Welcome
+                        li#drop(onclick='toggle_visibility()')
+                            a(href='#')
+                                strong Business Events
+                                span.arrow
+                            ul#be
+                                li
+                                    a(href='mailDelivery') Mail Delivery
+                                li
+                                    a(href='priceUpdate') Customer Price Update
+                                li
+                                    a(href='transportUpdate') Transport Cost Update
+                                li
+                                    a(href='routeManagement') Route Management
+                        script(type='text/javascript').
+                            function toggle_visibility() {
+                                var e = document.getElementById('be')
+                                var arr = document.getElementsByClassName('arrow');
+                                if(e.style.display == 'block') {
+                                    e.style.display = 'none';
+                                }
+                                else {
+                                    e.style.display = 'block';
+                                }
+                            }
+                        li#currenttab
+                            a(href='#')
+                                strong Business Monitoring
+                        if manager
+                            li
+                                a(href='decisionSupport')
+                                    strong Decision Support
+
+                #identifier
+                    | Logged in as !{signedInUser}
+                    if manager
+                        img#m-image(src='images/manager.png')
+                    else
+                        img#m-image(src='images/clerk.png')
+                    br
+                    span#m-status
+                        i !{signedInUser}
+                    br
+                    a#logout(href='index') Log out
+        #body
+            #page-title
+                | Business Monitoring
+            #content(style='width: 80%')
+                p
+                    | From this page you can monitor the Revenue, Expenditure, and Average Delivery Times for each route on the Kelburn
+                    | Post Network.
+                p
+                    | Select a heading to display the Business Information.
+                // ACTIVE ITEMS AREA
+                h1.head-hover(onclick="drop('mail-deliveries')") Mail Deliveries
+                #mail-deliveries
+                    table#trans-filter
+                        tr
+                            td Origin
+                            td Destination
+                            td Status
+                        tr
+                            td
+                                input#lead-trans-drop.trans-filter-drop(list='locations', placeholder='Origin')
+                            td
+                                input.trans-filter-drop(list='locations', placeholder='Destination')
+                            td
+                                input.trans-filter-drop(list='firms', placeholder='Status')
+                    br
+                    div#mailTable
+                        table.metrics
+                            tr
+                                td ID
+                                td Origin
+                                td Destination
+                                td Weight
+                                td Volume
+                                td Date Sent
+                                td Status
+                            each mail in mailDeliveries
+                                tr
+                                    td Mail !{mail.id}
+                                    td !{mail.origin}
+                                    td !{mail.destination}
+                                    td !{mail.weight}
+                                    td !{mail.volume}
+                                    td !{queries.formatDate(mail.send_date)}
+                                    td !{mail.case}
+                                tr
+
+                h1.head-hover(onclick='drop("rev-exp")') Revenue & Expenditure
+
+                div#rev-exp
+                    h2 Overview
+                    canvas#rev(width='600px')
+                    h2 Metrics
+                    div#routeTable
+                        table.metrics
+                            tr
+                                td
+                                    strong Route
+                                td
+                                    strong Origin
+                                td
+                                    strong Destination
+                                td
+                                    strong Type
+                                td
+                                    strong Total Revenue ($)
+                                td
+                                    strong Total Expenditure ($)
+                            each route in routes
+                                tr
+                                    td Route !{route.routeid}
+                                    td !{route.origin}
+                                    td !{route.destination}
+                                    td !{route.deliverytype}
+                                    td !{route.total_revenue}
+                                    td !{route.total_expenditure}
+                                tr
+                h1.head-hover(onclick='drop("av-times")') Average Delivery Times
+                div#av-times
+
+                    h2 Overview
+                    canvas#times
+                    h2 Metrics
+                    div#deliveryTable
+                        table.metrics
+                            tr
+                                td
+                                    strong Route Name
+                                td
+                                    strong Origin
+                                td
+                                    strong Destination
+                                td
+                                    strong Type
+                                td
+                                    strong Avg Delivery Time (days)
+                            each avg in avgDays
+                                tr
+                                    td Route !{avg.id}
+                                    td !{avg.origin}
+                                    td !{avg.destination}
+                                    td !{avg.deliverytype}
+                                    td !{avg.averagedays}
+                                tr
+                script.
+                    function drop(s) {
+                        var block = document.getElementById(s);
+                        if(block.style.display == 'none'){
+                            block.style.display = 'block';
+                        }else{
+                             block.style.display = 'none';
+                        }
+                    }
+                script.
+                    var graph = document.getElementById("rev");
+                    var ggraph = document.getElementById("times");
+
+                    // Revenue and Expenditure
+                    var r = !{JSON.stringify(routes)};
+                    var routeLabels = [];
+                    var revenue = [];
+                    var expenditure = [];
+                    for(i = 0; i < r.length; i++){
+                        routeLabels[i] = 'Route ' + r[i].routeid;
+                        revenue[i] = r[i].total_revenue;
+                        expenditure[i] = r[i].total_expenditure;
+                    }
+
+                    // Average days
+                    var a = !{JSON.stringify(avgDays)};
+                    var avgDaysLabels = [];
+                    var avgDaysData = [];
+                    for (i = 0; i < a.length; i++) {
+                        avgDaysLabels[i] = 'Route ' + a[i].id;
+                        avgDaysData[i] = a[i].averagedays;
+                    }
+
+                    var timeChart = new Chart(graph, {
+                        type: 'bar',
+                        data: {
+                            labels: routeLabels,
+                            datasets: [
+                                {
+                                    label: "Revenue",
+                                    fill: false,
+                                    backgroundColor: "rgba(0,147,201,1)",
+                                    borderColor: "rgba(0,147,201,1)",
+                                    borderCapStyle: 'butt',
+                                    borderDash: [],
+                                    borderDashOffset: 0.0,
+                                    borderJoinStyle: 'miter',
+                                    pointBorderColor: "rgba(0,147,201,1)",
+                                    pointBackgroundColor: "#fff",
+                                    pointBorderWidth: 1,
+                                    pointHoverRadius: 5,
+                                    pointHoverBackgroundColor: "rgba(0,147,201,1)",
+                                    pointHoverBorderColor: "rgba(255,255,255,1)",
+                                    pointHoverBorderWidth: 2,
+                                    pointRadius: 3,
+                                    pointHitDetectionRadius: 10,
+                                    data: revenue,
+                                },
+                                {
+                                    label: "Expenditure",
+                                    fill: false,
+                                    backgroundColor: "rgba(0,76,107,1)",
+                                    borderColor: "rgba(0,147,201,1)",
+                                    borderCapStyle: 'butt',
+                                    borderDash: [],
+                                    borderDashOffset: 0.0,
+                                    borderJoinStyle: 'miter',
+                                    pointBorderColor: "rgba(0,147,201,1)",
+                                    pointBackgroundColor: "#fff",
+                                    pointBorderWidth: 1,
+                                    pointHoverRadius: 5,
+                                    pointHoverBackgroundColor: "rgba(0,147,201,1)",
+                                    pointHoverBorderColor: "rgba(255,255,255,1)",
+                                    pointHoverBorderWidth: 2,
+                                    pointRadius: 3,
+                                    pointHitDetectionRadius: 10,
+                                    data: expenditure,
+                                }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                    var timeChart = new Chart(ggraph, {
+                        type: 'bar',
+                        data: {
+                            labels: avgDaysLabels,
+                            datasets: [
+                                {
+                                    label: "Average Days Taken",
+                                    fill: false,
+                                    backgroundColor: "rgba(0,147,201,1)",
+                                    borderColor: "rgba(0,147,201,1)",
+                                    borderCapStyle: 'butt',
+                                    borderDash: [],
+                                    borderDashOffset: 0.0,
+                                    borderJoinStyle: 'miter',
+                                    pointBorderColor: "rgba(0,147,201,1)",
+                                    pointBackgroundColor: "#fff",
+                                    pointBorderWidth: 1,
+                                    pointHoverRadius: 5,
+                                    pointHoverBackgroundColor: "rgba(0,147,201,1)",
+                                    pointHoverBorderColor: "rgba(255,255,255,1)",
+                                    pointHoverBorderWidth: 2,
+                                    pointRadius: 3,
+                                    pointHitDetectionRadius: 10,
+                                    data: avgDaysData,
+                                }]
+                        },
+                        options:{
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });

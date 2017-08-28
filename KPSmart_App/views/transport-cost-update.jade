@@ -1,0 +1,124 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        title Transport Cost Update| KPSmart
+        link(rel='stylesheet', href='stylesheets/style.css')
+    body
+        #nav
+            .sidenav
+                #nav-logo
+                    a(href='welcome', title='KPSmart Home')
+                        img(src='images/logo.png', height='75')
+                .nav-contain
+                    ul#nav-events
+                        li
+                            a(href='welcome')
+                                strong Welcome
+                        li#drop(onclick='toggle_visibility()')
+                            a(href='#')
+                                strong Business Events
+                                span.arrow
+                            ul#be
+                                li
+                                    a(href='mailDelivery') Mail Delivery
+                                li
+                                    a(href='priceUpdate') Customer Price Update
+                                li#currenttab
+                                    a(href='#') Transport Cost Update
+                                li
+                                    a(href='routeManagement') Route Management
+                        script(type='text/javascript').
+                            function toggle_visibility() {
+                                var e = document.getElementById('be')
+                                var arr = document.getElementsByClassName('arrow');
+                                if(e.style.display == 'block') {
+                                    e.style.display = 'none';
+                                }
+                                else {
+                                    e.style.display = 'block';
+                                }
+                            }
+                        li
+                            a(href='businessMonitoring')
+                                strong Business Monitoring
+                        if manager
+                            li#dec-sup-tab
+                                a(href='decisionSupport')
+                                    strong Decision Support
+                #identifier
+                    | Logged in as !{signedInUser}
+                    if manager
+                        img#m-image(src='images/manager.png')
+                    else
+                        img#m-image(src='images/clerk.png')
+                    br
+                    span#m-status
+                        i !{signedInUser}
+                    br
+                    a#logout(href='index') Log out
+        #body
+            #page-title
+                | Transport Cost Update
+            #content
+                p
+                    | Filter through the list to find a Route you would like to adjust the
+                    strong cost
+                    | for.
+                p You may also select the list from the table below.
+                img#page-image(src='images/transport.png')
+                p Filter your results &nbsp
+                p(style="color:red") #{message}
+                br
+                table#trans-filter
+                    tr
+                        td Origin
+                        td Destination
+                        td Transport Firm
+                        td Type
+                    tr
+                    form( action="/transportCostUpdate" method="post")
+                        td
+                            input#lead-trans-drop.trans-filter-drop(list='locations', placeholder='Origin', name='origin')
+                            datalist#locations
+                                each item in _location
+                                    option(value='#{item}')
+                        td
+                            input.trans-filter-drop(list='locations', placeholder='Destination', name='dest')
+
+                        td
+                            input.trans-filter-drop(list='firms', placeholder='Firm', name='firm')
+                            datalist#firms
+                                each item in _firm
+                                    option(value='#{item}')
+                        td
+                            input.trans-filter-drop(list='types', placeholder='Type', name='type')
+                            datalist#types
+                                each item in _type
+                                    option(value='#{item}')
+                            input(type="submit" style="display: none")
+                br
+                table#data-table
+                    tr
+                        td.table-head
+                            strong Route Name
+                        td.table-head
+                            strong Origin
+                        td.table-head
+                            strong Destination
+                        td.table-head
+                            strong Transport Firm
+                        td.table-head
+                            strong Type
+                    each item in data
+                        tr.hover(onclick="_passvalue(#{item.id})")
+                            td #{item.id}
+                            td #{item.origin}
+                            td #{item.destination}
+                            td #{item.transportfirm}
+                            td #{item.deliverytype}
+                    script(type="text/javascript").
+                        function _passvalue(id) {
+                            //console.log(id);
+                            document.location = 'routeCost/' + id;
+                        }

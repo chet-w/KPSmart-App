@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transport Cost Update| KPSmart</title>
+    <link rel="stylesheet" href="../public/stylesheets/style.css">
+
+</head>
+
+<body>
+
+<div id="nav">
+    <div class="sidenav">
+        <div id="nav-logo">
+            <a href="welcome.html" title="KPSmart Home" ><img src="../public/images/logo.png" height="75"/></a>
+        </div>
+        <div class="nav-contain">
+
+            <ul id=" nav-events">
+                <li><a href="welcome.html"><strong>Welcome</strong></a></li>
+
+                <li id="drop"  onclick="toggle_visibility()"><a href="#"><strong>Business Events</strong><span class="arrow"></span></a>
+                    <ul id="be">
+                        <li><a href="mail-delivery.html">Mail Delivery</a></li>
+                        <li><a href="price-update.html">Customer Price Update</a></li>
+                        <li id="currenttab"><a href="#">Transport Cost Update</a></li>
+                        <li><a href="route-management.html">Route Management</a></li>
+                    </ul>
+                </li>
+                <script type="text/javascript">
+                    function toggle_visibility() {
+                        var e = document.getElementById('be')
+                        var arr = document.getElementsByClassName('arrow');
+                        if(e.style.display == 'block') {
+                            e.style.display = 'none';
+                        }
+                        else {
+                            e.style.display = 'block';
+                        }
+                    }
+                </script>
+
+                <li><a href="monitoring.html"><strong>Business Monitoring</strong></a></li>
+            </ul>
+
+
+        </div>
+        <div id="identifier">
+            Logged in as <i>Chet</i>
+            <img src="../public/images/clerk.png" id="m-image"/><br>
+            <span id="m-status"><i>Clerk</i></span>
+        </div>
+    </div>
+
+</div>
+<div id="body">
+    <div id="page-title">
+        Transport Cost Update
+    </div>
+    <div id="content">
+        <p>Filter through the list to find a Route you would like to adjust the <strong>cost </strong>for.</p>
+        <p>You may also select the list from the table below.</p>
+        <img src="../public/images/transport.png" id="page-image">
+        <p>Filter your results &nbsp</p><br>
+
+        <table id="trans-filter">
+            <tr>
+                <td>Origin</td>
+                <td>Destination</td>
+                <td>Transport Firm</td>
+                <td>Type</td>
+            </tr>
+            <tr>
+                <td><input class="trans-filter-drop" id="lead-trans-drop" list="locations" placeholder="Origin"></td>
+                <td><input class="trans-filter-drop" list="locations" placeholder="Destination"></td>
+                <td><input class="trans-filter-drop" list="firms" placeholder="Firm"></td>
+                <td><input class="trans-filter-drop" list="trans-types" placeholder="Type"></td>
+            </tr>
+        </table>
+        <br>
+
+
+        <table id="data-table">
+            <tr>
+                <td><strong>Route Name</strong></td>
+                <td><strong>Origin</strong></td>
+                <td><strong>Destination</strong></td>
+                <td><strong>Transport Firm</strong></td>
+                <td><strong>Type</strong></td>
+            </tr>
+            <tr class="hover" onclick="document.location = 'route-cost-update.html';">
+                <td>Route 01</td>
+                <td>Wellington</td>
+                <td>Auckland</td>
+                <td>Mainfreight</td>
+                <td>Land</td>
+            </tr>
+            <tr class="hover">
+                <td>Route 02</td>
+                <td>Wellington</td>
+                <td>Hamilton</td>
+                <td>NZ Couriers</td>
+                <td>Land</td>
+            </tr>
+            <tr class="hover">
+                <td>Route 03</td>
+                <td>Wellington</td>
+                <td>Christchurch</td>
+                <td>Air New Zealand</td>
+                <td>Air</td>
+            </tr>
+            <tr class="hover">
+                <td>Route 04</td>
+                <td>Auckland</td>
+                <td>Wellington</td>
+                <td>Air New Zealand</td>
+                <td>Air</td>
+            </tr>
+        </table>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>

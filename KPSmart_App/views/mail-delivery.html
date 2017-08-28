@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mail Delivery | KPSmart</title>
+    <link rel="stylesheet" href="../public/stylesheets/style.css">
+
+</head>
+
+<body>
+
+<div id="nav">
+    <div class="sidenav">
+        <div id="nav-logo">
+            <a href="welcome.html" title="KPSmart Home" ><img src="../public/images/logo.png" height="75"/></a>
+        </div>
+
+        <div class="nav-contain">
+
+            <ul id=" nav-events">
+                <li><a href="#"><strong>Welcome</strong></a></li>
+
+                <li id="drop" onclick="toggle_visibility()"><a href="#"><strong>Business Events</strong><span class="arrow"></span></a>
+                    <ul id="be">
+                        <li id="currenttab"><a href="#">Mail Delivery</a></li>
+                        <li><a href="price-update.html">Customer Price Update</a></li>
+                        <li><a href="transport-cost-update.html">Transport Cost Update</a></li>
+                        <li><a href="route-management.html">Route Management</a></li>
+                    </ul>
+                </li>
+                <script type="text/javascript">
+                    function toggle_visibility() {
+                        var e = document.getElementById('be')
+                        var arr = document.getElementsByClassName('arrow');
+                        if(e.style.display == 'block') {
+                            e.style.display = 'none';
+                        }
+                        else {
+                            e.style.display = 'block';
+                        }
+                    }
+                </script>
+
+                <li><a href="monitoring.html"><strong>Business Monitoring</strong></a></li>
+            </ul>
+
+
+        </div>
+        <div id="identifier">
+            Logged in as <i>Chet</i>
+            <img src="../public/images/clerk.png" id="m-image"/><br>
+            <span id="m-status"><i>Clerk</i></span>
+        </div>
+    </div>
+
+</div>
+<div id="body">
+    <div id="page-title">
+        Mail Delivery
+    </div>
+    <div id="content">
+        <p>Please enter the details for the parcel you would like to send.</p>
+        <br>
+        <br>
+        <img src="../public/images/delivery.png" id="page-image"/>
+        <form>
+            Parcel ID<br>
+            <input type="text" placeholder="Parcel ID"><br>
+            <br>
+            Origin<br>
+            <input list="locations" placeholder="Select a Location">
+            <datalist id="locations">
+                <option value="Auckland">
+                <option value="Hamilton">
+                <option value="Tauranga">
+                <option value="Napier">
+                <option value="Taupo">
+                <option value="New Plymouth">
+                <option value="Palmerston North">
+                <option value="Wellington">
+                <option value="Nelson">
+                <option value="Chrischurch">
+                <option value="Dunedin">
+            </datalist>
+            <br><br>
+            Destination<br>
+            <input list="locations" placeholder="Select a Location">
+            <br><br>
+            Weight (kg) <span id="vol-lab">Volume (m3)</span><br>
+            <input id="weight" type="number" placeholder="0.1 - 25.0" min="0.1" max="25.0">
+            <input id="vol" type="number" placeholder="0.1 - 25.0" min="0.1" max="25.0">
+            <br><br>
+
+            <input type="submit" value="Submit">
+
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

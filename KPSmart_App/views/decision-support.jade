@@ -1,0 +1,135 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        title Decision Support | KPSmart
+        link(rel='stylesheet', href='stylesheets/style.css')
+    body
+        #nav
+            .sidenav
+                #nav-logo
+                    a(href='welcome.html', title='KPSmart Home')
+                        img(src='images/logo.png', height='75')
+                .nav-contain
+                    ul#nav-events
+                        li
+                            a(href='welcome')
+                                strong Welcome
+                        li#drop(onclick='toggle_visibility()')
+                            a(href='#')
+                                strong Business Events
+                                span.arrow
+                            ul#be
+                                li
+                                    a(href='mailDelivery') Mail Delivery
+                                li
+                                    a(href='priceUpdate') Customer Price Update
+                                li
+                                    a(href='transportCostUpdate') Transport Cost Update
+                                li
+                                    a(href='routeManagement') Route Management
+                        script(type='text/javascript').
+                            function toggle_visibility() {
+                                var e = document.getElementById('be')
+                                var arr = document.getElementsByClassName('arrow');
+                                if (e.style.display == 'block') {
+                                    e.style.display = 'none';
+                                }
+                                else {
+                                    e.style.display = 'block';
+                                }
+                            }
+                        li
+                            a(href='BusinessMonitoring')
+                                strong Business Monitoring
+                        if manager
+                            li
+                                a(href='decisionSupport')
+                                    strong Decision Support
+                #identifier
+                    | Logged in as !{signedInUser}
+                    if manager
+                        img#m-image(src='images/manager.png')
+                    else
+                        img#m-image(src='images/clerk.png')
+                    br
+                    span#m-status
+                        i !{signedInUser}
+                    br
+                    a#logout(href='index') Log out
+        #body
+            #page-title
+                | Decision Support
+            #content.business(style='width: 80%')
+                p
+                    | As a Manager, you can compare the Revenue and Expenditure of a range of routes over a selected range of
+                    | calendar days.
+                p
+                    | You can filter your range of Routes to be examined by their Origin, Destination, Transport Firm used,
+                    | and Type of transport (Land, Air, or Sea).
+                p
+                    | You may also view a list of all the Critical Routes on the KPS Network at the bottom of the page.
+                h1 Insights
+                table
+                    tr
+                        td
+                            | Begin Date
+                        td
+                            | End Date
+                    tr
+                        td
+                            input(type='date', placeholder='DD/MM/YYYY')
+                        td
+                            input(type='date', placeholder='DD/MM/YYYY')
+                table#trans-filter
+                    tr
+                        td Origin
+                        td Destination
+                        td Transport Firm
+                        td Type
+                    tr
+                        td
+                            input#lead-trans-drop.trans-filter-drop(list='locations', placeholder='Origin')
+                        td
+                            input.trans-filter-drop(list='locations', placeholder='Destination')
+                        td
+                            input.trans-filter-drop(list='firms', placeholder='Firm')
+                        td
+                            input.trans-filter-drop(list='trans-types', placeholder='Type')
+                br
+                table.metrics
+                    tr
+                        td Route ID
+                        td Origin
+                        td Destination
+                        td Firm
+                        td Type
+                        td Revenue
+                        td Expenditure
+                    //
+                      Entries from the filter. To find the revenue and expenditure, check all the parcels
+                      on the route and if they were dispatched within the timeframe then take the amount that
+                      that parcel cost and made (expenditure and revenue) and add it to a totalRevenue variable
+                      that is what gets displayed in the "Revenue" tab. Or so i would think, you can do it any
+                      way you want.
+                    tr
+                        td
+                        td
+                        td
+                        td
+                        td
+                        td
+                        td
+                br
+                br
+                h1 Critical Routes
+                p
+                    | The Kelburn Post Service manages a range of Routes on its network, some of which yield less
+                    | income than they cost. These Critical Routes can be seen below.
+                table.metrics
+                    tr
+                        td RouteID
+                        td Origin
+                        td Destination
+                        td Average Cost ($)
+                        td Average Price ($)

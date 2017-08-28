@@ -1,0 +1,111 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        title Mail Delivery | KPSmart
+        link(rel='stylesheet', href='stylesheets/style.css')
+
+        script(type="text/javascript" src="app.js")
+    body(onload='show()')
+        script.
+            function show() {
+                block = document.getElementById('be');
+                block.style.display = 'block';
+            }
+
+        #nav
+            .sidenav
+                #nav-logo
+                    a(href='welcome', title='KPSmart Home')
+                        img(src='images/logo.png', height='75')
+                .nav-contain
+                    ul#nav-events
+                        li
+                            a(href='welcome')
+                                strong Welcome
+                        li#drop(onclick="toggle_visibility()")
+                            a(href='#')
+                                strong Business Events
+                                span.arrow
+                            ul#be
+                                li#currenttab
+                                    a(href='mailDelivery') Mail Delivery
+                                li
+                                    a(href='priceUpdate') Customer Price Update
+                                li
+                                    a(href='transportCostUpdate') Transport Cost Update
+                                li
+                                    a(href='routeManagement') Route Management
+                        script(type='text/javascript').
+                            function toggle_visibility() {
+                                var e = document.getElementById('be')
+                                var arr = document.getElementsByClassName('arrow');
+                                if (e.style.display == 'block') {
+                                    e.style.display = 'none';
+                                }
+                                else {
+                                    e.style.display = 'block';
+                                }
+                            }
+                        li
+                            a(href='businessMonitoring')
+                                strong Business Monitoring
+                        if manager
+                            li
+                                a(href='decisionSupport')
+                                    strong Decision Support
+                #identifier
+                    | Logged in as !{signedInUser}
+                    if manager
+                        img#m-image(src='images/manager.png')
+                    else
+                        img#m-image(src='images/clerk.png')
+                    br
+                    span#m-status
+                        i !{signedInUser}
+                    br
+                    a#logout(href='index') Log out
+        #body
+
+            #page-title
+                | Mail Delivery
+            #content
+                p Please enter the details for the parcel you would like to send. !{message}
+                br
+                br
+                img#page-image(src='images/delivery.png')
+                form(role="form" method="post" action="mailDelivery")
+                    |Origin
+                    br
+                    input(list='locations', name='origin', placeholder='Select a Location')
+                    datalist#locations
+                        each item in data
+                            option(value='#{item.origin}')
+
+                    br
+                    br
+                    |             Destination
+                    br
+                    input(list='locations', name='destination', placeholder='Select a Location')
+                    br
+                    br
+                    |Type Of Freight
+                    br
+                    input(list='freights', name='type_freight', placeholder='Select a type')
+                    datalist#freights
+                        option(value='High')
+                        option(value='Low')
+                    br
+                    br
+                    | Weight (kg)
+                    span#vol-lab
+                        | Volume (m
+                        sup 3
+                        | )
+                    br
+                    input#weight(type='number', name='weight', step='0.1', placeholder='0.1 - 25.0')
+                    input#vol(type='number', name='volume', step='0.01' placeholder='0.01 - 1.00')
+                    br
+                    br
+                    e !{message}
+                    input#submit(type='submit', value='Next')

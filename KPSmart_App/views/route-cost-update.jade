@@ -1,0 +1,100 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        title Route xx Information | KPSmart
+        link(rel='stylesheet', href='../stylesheets/style.css')
+    body(onload='show()')
+        script.
+            function show() {
+                block = document.getElementById('be');
+                block.style.display = 'block';
+            }
+
+        #nav
+            .sidenav
+                #nav-logo
+                    a(href='../welcome', title='KPSmart Home')
+                        img(src='../images/logo.png', height='75')
+                .nav-contain
+                    ul#nav-events
+                        li
+                            a(href='../welcome')
+                                strong Welcome
+                        li#drop(onclick='toggle_visibility()')
+                            a(href='#')
+                                strong Business Events
+                                span.arrow
+                            ul#be
+                                li
+                                    a(href='mailDelivery') Mail Delivery
+                                li
+                                    a(href='../priceUpdate') Customer Price Update
+                                li#currenttab
+                                    a(href='../transportCostUpdate') Transport Cost Update
+                                li
+                                    a(href='../routeManagement') Route Management
+                        script(type='text/javascript').
+                            function toggle_visibility() {
+                                var e = document.getElementById('be')
+                                var arr = document.getElementsByClassName('arrow');
+                                if(e.style.display == 'block') {
+                                    e.style.display = 'none';
+                                }
+                                else {
+                                    e.style.display = 'block';
+                                }
+                            }
+                        li
+                            a(href='../businessMonitoring')
+                                strong Business Monitoring
+                        if manager
+                            li
+                                a(href='../decisionSupport')
+                                    strong Decision Support
+                #identifier
+                    | Logged in as !{signedInUser}
+                    if manager
+                        img#m-image(src='../images/manager.png')
+                    else
+                        img#m-image(src='../images/clerk.png')
+                    br
+                    span#m-status
+                        i !{signedInUser}
+                    br
+                    a#logout(href='index') Log out
+        #body
+            #page-title
+                | Route #{data[0].id} Cost Update
+            #content
+                p Please select an element for the cost of this route to maintain.
+                p(style="color:#008000") #{message}
+                img#page-image(src='../images/transport2.png')
+                br
+                br
+                form#route-price-adj(role="form" method="post" action="/routeCost")
+                    |             Cost per Kilogram ($/kg)
+                    br
+                    span.pricing-min
+                        strong - Current Cost: $ #{data[0].cost_per_kg_business}/km
+                    input(type='number', placeholder='Price per kg' name="newPriceKg")
+                    br
+                    br
+                    br
+                    br
+                    |             Cost per Cubic Metre ($/m
+                    sup 3
+                    | )
+                    br
+                    span.pricing-min
+                        strong - Current Cost: $ #{data[0].cost_per_volume_business}/km
+                    input(type='number', placeholder='Price per cubic m', name="newPriceVolume")
+                    br
+                    br
+                    br
+                    br
+                    input#submit(type='submit', value='submit', onclick='check()')
+                    script.
+                        function check(){
+                            confirm("Are you sure about these changes?");
+                        }

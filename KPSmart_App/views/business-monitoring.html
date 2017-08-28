@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Business Monitoring| KPSmart</title>
+    <link rel="stylesheet" href="../public/stylesheets/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js" />
+</head>
+
+<body onload="show()">
+<script>
+    function show() {
+        var block = document.getElementById('be');
+        block.style.display = 'block';
+    }
+
+</script>
+
+<div id="nav">
+    <div class="sidenav">
+        <div id="nav-logo">
+            <a href="welcome.html" title="KPSmart Home" ><img src="../public/images/logo.png" height="75"/></a>
+        </div>
+        <div class="nav-contain">
+
+            <ul id=" nav-events">
+                <li><a href="welcome.html"><strong>Welcome</strong></a></li>
+
+                <li id="drop"  onclick="toggle_visibility()"><a href="#"><strong>Business Events</strong><span class="arrow"></span></a>
+                    <ul id="be">
+                        <li><a href="mail-delivery.html">Mail Delivery</a></li>
+                        <li><a href="price-update.html">Customer Price Update</a></li>
+                        <li><a href="transport-update.html">Transport Cost Update</a></li>
+                        <li><a href="route-management.html">Route Management</a></li>
+                    </ul>
+                </li>
+                <script type="text/javascript">
+                    function toggle_visibility() {
+                        var e = document.getElementById('be')
+                        var arr = document.getElementsByClassName('arrow');
+                        if(e.style.display == 'block') {
+                            e.style.display = 'none';
+                        }
+                        else {
+                            e.style.display = 'block';
+                        }
+                    }
+                </script>
+
+                <li id="currenttab"><a href="#"><strong>Business Monitoring</strong></a></li>
+                <li id="dec-sup-tab"><a href="#"><strong>Decision Support</strong></a></li>
+            </ul>
+
+
+        </div>
+        <div id="identifier">
+            Logged in as <i>Chet</i>
+            <img src="../public/images/clerk.png" id="m-image"/><br>
+            <span id="m-status"><i>Clerk</i></span>
+            <br>
+            <a id="logout" href="index.html">Log out</a>
+
+        </div>
+    </div>
+
+</div>
+<div id="body">
+    <div id="page-title">
+        Business Monitoring
+    </div>
+    <div id="content" class="business" style="width: 80%">
+        <p>
+            From this page you can monitor the Revenue, Expenditure, and Average Delivery Times for each route on the Kelburn
+            Post Network.
+        </p>
+        <p>
+            Select a heading to display the Business Information.
+        </p>
+        <!--ACTIVE ITEMS AREA-->
+        <h1 class="head-hover" onclick="drop('active-parcels')">Active Parcels</h1>
+        <div id="active-parcels">
+            <table class="metrics">
+                <tr>
+                    <td><strong>ParcelID</strong></td>
+                    <td><strong>Origin</strong></td>
+                    <td><strong>Destination</strong></td>
+                    <td><strong>Weight</strong></td>
+                    <td><strong>Volume</strong></td>
+                    <td><strong>Date Sent</strong></td>
+                    <td><strong>Status</strong></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+
+        <h1 class="head-hover" onclick="drop('rev-exp')">Revenue & Expenditure</h1>
+        <div id="rev-exp">
+
+            <h2>Overview</h2>
+            <canvas id="rev" width="600px"></canvas>
+
+            <h2>Metrics</h2>
+            <table class="metrics">
+                <tr>
+                    <td><strong>Route Name</strong></td>
+                    <td><strong>Origin</strong></td>
+                    <td><strong>Destination</strong></td>
+                    <td><strong>Type</strong></td>
+                    <td><strong>Total Revenue ($)</strong></td>
+                    <td><strong>Total Expenditure ($)</strong></td>
+                </tr>
+                <tr>
+                    <td>Route 1</td>
+                    <td>Auckland</td>
+                    <td>Wellington</td>
+                    <td>Air</td>
+                    <td>$120.00</td>
+                    <td>$80.00</td>
+                </tr>
+                <tr>
+                    <td>Route 1</td>
+                    <td>Auckland</td>
+                    <td>Wellington</td>
+                    <td>Air</td>
+                    <td>$120.00</td>
+                    <td>$80.00</td>
+                </tr>
+                <tr>
+                    <td>Route 1</td>
+                    <td>Auckland</td>
+                    <td>Wellington</td>
+                    <td>Air</td>
+                    <td>$120.00</td>
+                    <td>$80.00</td>
+                </tr>
+                <tr>
+                    <td>Route 1</td>
+                    <td>Auckland</td>
+                    <td>Wellington</td>
+                    <td>Air</td>
+                    <td>$120.00</td>
+                    <td>$80.00</td>
+                </tr>
+                <tr>
+                    <td>Route 1</td>
+                    <td>Auckland</td>
+                    <td>Wellington</td>
+                    <td>Air</td>
+                    <td>$120.00</td>
+                    <td>$80.00</td>
+                </tr>
+                <tr>
+                    <td>Route 1</td>
+                    <td>Auckland</td>
+                    <td>Wellington</td>
+                    <td>Air</td>
+                    <td>$120.00</td>
+                    <td>$80.00</td>
+                </tr>
+                <tr>
+                    <td>Route 1</td>
+                    <td>Auckland</td>
+                    <td>Wellington</td>
+                    <td>Air</td>
+                    <td>$120.00</td>
+                    <td>$80.00</td>
+                </tr>
+                <tr>
+                    <td>Route 1</td>
+                    <td>Auckland</td>
+                    <td>Wellington</td>
+                    <td>Air</td>
+                    <td>$120.00</td>
+                    <td>$80.00</td>
+                </tr>
+
+            </table>
+        </div>
+
+        <h1 class="head-hover" onclick="drop('av-times')">Average Delivery Times</h1>
+
+        <div id="av-times">
+
+
+            <h2>Overview</h2>
+            <canvas id="times"></canvas>
+
+            <h2>Metrics</h2>
+            <table class="metrics">
+                <tr>
+                    <td><strong>Route Name</strong></td>
+                    <td><strong>Origin</strong></td>
+                    <td><strong>Destination</strong></td>
+                    <td><strong>Type</strong></td>
+                    <td><strong>Average Delivery Time (days)</strong></td>
+                </tr>
+                <tr>
+                    <td>Route 1</td>
+                    <td>Auckland</td>
+                    <td>Wellington</td>
+                    <td>Air</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>Route 1</td>
+                    <td>Auckland</td>
+                    <td>Wellington</td>
+                    <td>Air</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>Route 1</td>
+                    <td>Auckland</td>
+                    <td>Wellington</td>
+                    <td>Air</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>Route 1</td>
+                    <td>Auckland</td>
+                    <td>Wellington</td>
+                    <td>Air</td>
+                    <td>4</td>
+                </tr>
+
+            </table>
+        </div>
+        <script>
+            function drop(s) {
+                var block = document.getElementById(s);
+                if(block.style.display == 'none'){
+                    block.style.display = 'block';
+                }else{
+                    block.style.display = 'none';
+                }
+
+
+            }
+        </script>
+        <script>
+            var graph = document.getElementById("rev");
+            var ggraph = document.getElementById("times");
+            var timeChart = new Chart(graph, {
+                type: 'bar',
+                data: {
+                    labels: ["Route 1", "Route 2", "Route 3", "Route 4", "Route 5", "Route 6", "Route 7", "Route 8", "Route 9",
+                        "Route 10", "Route 11", "Route 12", "Route 13", "Route 14", "Route 15", "Route 16", "Route 17", "Route 18", "Route 19",
+                        "Route 20", "Route 21", "Route 22", "Route 23", "Route 24", "Route 25", "Route 26",],
+                    datasets: [
+                        {
+                            label: "Revenue",
+                            fill: false,
+                            backgroundColor: "rgba(0,147,201,1)",
+                            borderColor: "rgba(0,147,201,1)",
+                            borderCapStyle: 'butt',
+                            borderDash: [],
+                            borderDashOffset: 0.0,
+                            borderJoinStyle: 'miter',
+                            pointBorderColor: "rgba(0,147,201,1)",
+                            pointBackgroundColor: "#fff",
+                            pointBorderWidth: 1,
+                            pointHoverRadius: 5,
+                            pointHoverBackgroundColor: "rgba(0,147,201,1)",
+                            pointHoverBorderColor: "rgba(255,255,255,1)",
+                            pointHoverBorderWidth: 2,
+                            pointRadius: 3,
+                            pointHitDetectionRadius: 10,
+
+                            data: [100, 200, 65, 33, 187, 32, 12, 43, 65, 98, 106, 186, 153,
+                                   153, 186, 106, 98, 65, 43, 12, 32, 187, 33, 65, 200, 100],
+                        },
+                        {
+                            label: "Expenditure",
+                            fill: false,
+                            backgroundColor: "rgba(0,76,107,1)",
+                            borderColor: "rgba(0,147,201,1)",
+                            borderCapStyle: 'butt',
+                            borderDash: [],
+                            borderDashOffset: 0.0,
+                            borderJoinStyle: 'miter',
+                            pointBorderColor: "rgba(0,147,201,1)",
+                            pointBackgroundColor: "#fff",
+                            pointBorderWidth: 1,
+                            pointHoverRadius: 5,
+                            pointHoverBackgroundColor: "rgba(0,147,201,1)",
+                            pointHoverBorderColor: "rgba(255,255,255,1)",
+                            pointHoverBorderWidth: 2,
+                            pointRadius: 3,
+                            pointHitDetectionRadius: 10,
+
+                            data: [80, 180, 45, 13, 167, 12, 02, 33, 55, 78, 86, 166, 133,
+                                153, 166, 86, 78, 45, 23, 02, 52, 177, 33, 55, 90, 80],
+
+                        }]
+                }
+
+            });
+            var timeChart = new Chart(ggraph, {
+                type: 'bar',
+                data: {
+                    labels: ["Route 1", "Route 2", "Route 3", "Route 4", "Route 5", "Route 6", "Route 7", "Route 8", "Route 9",
+                        "Route 10", "Route 11", "Route 12", "Route 13", "Route 14", "Route 15", "Route 16", "Route 17", "Route 18", "Route 19",
+                        "Route 20", "Route 21", "Route 22", "Route 23", "Route 24", "Route 25", "Route 26",],
+                    datasets: [
+                        {
+                            label: "Average Days Taken",
+                            fill: false,
+                            backgroundColor: "rgba(0,147,201,1)",
+                            borderColor: "rgba(0,147,201,1)",
+                            borderCapStyle: 'butt',
+                            borderDash: [],
+                            borderDashOffset: 0.0,
+                            borderJoinStyle: 'miter',
+                            pointBorderColor: "rgba(0,147,201,1)",
+                            pointBackgroundColor: "#fff",
+                            pointBorderWidth: 1,
+                            pointHoverRadius: 5,
+                            pointHoverBackgroundColor: "rgba(0,147,201,1)",
+                            pointHoverBorderColor: "rgba(255,255,255,1)",
+                            pointHoverBorderWidth: 2,
+                            pointRadius: 3,
+                            pointHitDetectionRadius: 10,
+
+                            data: [5, 5, 4, 3, 5, 3, 4, 4, 5, 7, 4, 3, 7,
+                                5, 6, 4, 3, 3, 6, 6, 3, 4, 5, 4, 3, 7],
+                        }]
+                }
+
+            });
+
+
+        </script>
+
+    </div>
+
+</div>
+
+</body>
+</html>
